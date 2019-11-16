@@ -7,7 +7,7 @@ void init_person(Person *person, uint8_t age, uint8_t height, char *name) {
 }
 
 void say_hi(Person *person) {
-  LOG_DEBUG("hello, my name is %s", person->name);
+  LOG_DEBUG("\nHello, my name is %s\n", person->name);
 }
 
 uint8_t get_height_cm(Person *person) {

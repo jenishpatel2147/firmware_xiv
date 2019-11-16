@@ -1,7 +1,6 @@
 #include "log.h"
 #include "person.h"
 
-
 static Person s_arshan = { 0 };
 
 int main() {
@@ -12,7 +11,8 @@ int main() {
             s_arshan.name,
             s_arshan.age,
             s_arshan.height);
-
+  
+  say_hi(&s_arshan);
   return 0;
 }
 
