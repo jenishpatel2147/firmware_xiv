@@ -1,12 +1,18 @@
 typedef enum {
-	CAN_FAULT,
-	CAN_RX,
+	CAN_BRAKE_PRESSED,
+	CAN_BRAKE_RELEASED,
+	NUM_BRAKE_CAN_EVENTS,
+} BrakeCanEvents;
+
+typedef enum {
+	CAN_RX = NUM_BRAKE_CAN_EVENTS + 1,
 	CAN_TX,
+	CAN_FAULT,
 	NUM_CAN_EVENTS,
 } CanEvents;
 
 typedef enum {
-	CAR_INPUT_FAULT = NUM_CAN_EVENTS,
+	CAR_INPUT_FAULT = NUM_CAN_EVENTS + 1,
 	CAR_INPUT_NEUTRAL,
 	CAR_INPUT_DRIVE,
 	NUM_CAR_EVENTS,
@@ -19,12 +25,6 @@ typedef enum {
 } BrakeEvents;
 
 typedef enum {
-	CAN_BRAKE_PRESSED = NUM_BRAKE_EVENTS + 1,
-	CAN_BRAKE_RELEASED,
-	NUM_BRAKE_CAN_EVENTS,
-} BrakeCanEvents;
-
-typedef enum {
-	THROTTLE_DATA = NUM_BRAKE_CAN_EVENTS + 1,
+	THROTTLE_DATA = NUM_BRAKE_EVENTS + 1,
 	NUM_THROTTLE_EVENTS,
 } ThrottleEvents;
