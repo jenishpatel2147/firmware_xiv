@@ -48,12 +48,12 @@ bool brake_fsm_process_event(Event *e) {
 }
 
 //main should have a brake fsm, and ads1015storage
-void brake_fsm_init(Fsm *brake, Ads1015Storage *storage) {
+StatusCode brake_fsm_init(Fsm *brake, Ads1015Storage *storage) {
   fsm_state_init(pressed, prv_pressed_output);
   fsm_state_init(released, prv_released_output);
   brake_fsm = brake;
 
   fsm_init(brake, "Brake_FSM", &released, brake);
 
-  ads1015_configure_channel(storage, storage->current_channel, true, prv_callback_channel1, storage);
+  return ads1015_configure_channel(storage, storage->current_channel, true, prv_callback_channel1, storage);
 }
