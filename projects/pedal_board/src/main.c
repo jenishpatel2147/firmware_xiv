@@ -37,7 +37,7 @@ int main() {
     .tx = { GPIO_PORT_A, 12 },  // CHANGE
     .rx = { GPIO_PORT_A, 11 },  // CHANGE
   };
-  can_init(&can_storage, &can_settings);
+  pedal_can_init(&can_storage, &can_settings);
 
   // setup ADC readings
   I2CSettings i2c_settings = {
@@ -59,6 +59,7 @@ int main() {
       LOG_DEBUG("working\n");
       // perhaps distinguis which events are actually for can
       can_process_event(&e);
+      pedal_can_process_event(&e);
     }
     */
   return 0;
