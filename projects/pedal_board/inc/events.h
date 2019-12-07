@@ -1,5 +1,5 @@
 typedef enum {
-	CAN_BRAKE_PRESSED,
+	CAN_BRAKE_PRESSED = 0,
 	CAN_BRAKE_RELEASED,
 	NUM_BRAKE_CAN_EVENTS,
 } BrakeCanEvents;
