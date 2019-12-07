@@ -8,6 +8,7 @@
 #include "log.h"
 // include all the modules
 #include "brake_fsm.h"
+#include "pedal_can.h"
 #include "events.h"
 #include "test_helpers.h"
 #include "unity.h"
@@ -51,16 +52,14 @@ int main() {
 
   brake_fsm_init(&brake_fsm, &ads1015_storage);
 
-/*
     Event e = { 0 };
     while (true) {
       event_process(&e);
       brake_fsm_process_event(&e);
-      LOG_DEBUG("working\n");
+      //LOG_DEBUG("working\n");
       // perhaps distinguis which events are actually for can
       can_process_event(&e);
       pedal_can_process_event(&e);
     }
-    */
   return 0;
 }
