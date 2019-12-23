@@ -40,6 +40,9 @@ int main() {
 
     // Intialize ADS1015 
     ads1015_init(&ads1015_storage, I2C_PORT_2, ADS1015_ADDRESS_GND, &ready_pin); 
+
+    // Initialize throttle module 
+    throttle_init(&throttle_storage); 
     
     Event e = { 0 }; 
     while (true) {
