@@ -119,7 +119,7 @@ void test_brake_fsm_released_to_can_released(void) {
 }
 void test_brake_fsm_released_to_throttle(void) {
   Event e = {
-    .id = THROTTLE_DATA,
+    .id = PEDAL_EVENT_THROTTLE_READING,
   };
   TEST_ASSERT_FALSE(brake_fsm_process_event(&e));
 }
@@ -221,7 +221,7 @@ void test_brake_fsm_pressed_to_throttle(void) {
   };
   brake_fsm_process_event(&e);
 
-  e.id = THROTTLE_DATA;
+  e.id = PEDAL_EVENT_THROTTLE_READING;
   TEST_ASSERT_FALSE(brake_fsm_process_event(&e));
 }
 

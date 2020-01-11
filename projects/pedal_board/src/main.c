@@ -8,17 +8,21 @@
 #include "log.h"
 // include all the modules
 #include "brake_fsm.h"
-#include "pedal_can.h"
+#include "drive_fsm.h"
 #include "events.h"
-#include "test_helpers.h"
-#include "unity.h"
+#include "pedal_can.h"
 #include "status.h"
+#include "test_helpers.h"
+#include "throttle.h"
+#include "unity.h"
 
 #define CAN_DEVICE_ID 0x1
 
 static Fsm brake_fsm;
+static Fsm drive_fsm;
 static Ads1015Storage ads1015_storage;
 static CanStorage can_storage;
+static ThrottleStorage throttle_storage;
 
 int main() {
   LOG_DEBUG("WORKING\n");
@@ -28,6 +32,7 @@ int main() {
   gpio_it_init();
   soft_timer_init();
   event_queue_init();
+  LOG_DEBUG("Initialized modules\n");
 
   const CanSettings can_settings = {
     .device_id = CAN_DEVICE_ID,
@@ -40,6 +45,8 @@ int main() {
   };
   pedal_can_init(&can_storage, &can_settings);
 
+  drive_fsm_init(&drive_fsm, &throttle_storage);
+
   // setup ADC readings
   I2CSettings i2c_settings = {
     .speed = I2C_SPEED_FAST,                   //
@@ -51,15 +58,16 @@ int main() {
   ads1015_init(&ads1015_storage, I2C_PORT_2, ADS1015_ADDRESS_GND, &ready_pin);
 
   brake_fsm_init(&brake_fsm, &ads1015_storage);
+  throttle_init(&throttle_storage);
 
-    Event e = { 0 };
-    while (true) {
-      event_process(&e);
-      brake_fsm_process_event(&e);
-      //LOG_DEBUG("working\n");
-      // perhaps distinguis which events are actually for can
-      can_process_event(&e);
-      pedal_can_process_event(&e);
-    }
+  Event e = { 0 };
+  while (true) {
+    event_process(&e);
+    brake_fsm_process_event(&e);
+    // LOG_DEBUG("working\n");
+    // perhaps distinguish which events are actually for can
+    can_process_event(&e);
+    pedal_can_process_event(&e);
+  }
   return 0;
 }
