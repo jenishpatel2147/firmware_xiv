@@ -66,3 +66,6 @@ logs/
 ### Vagrant Patch ###
 *.box
 .idea
+
+pedal_board/
+lights_control/
