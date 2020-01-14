@@ -1,0 +1,19 @@
+#include "front_power_dist_can_config.h"
+
+const FrontPowerDistCanSettings fpd_settings = {
+    // clang-format off
+    .event_data_lookup = {
+        [EE_FRONT_POWER_DIST_DRIVER_DISPLAY] = FRONT_POWER_DIST_EVENT_DRIVER_DISPLAY,
+        [EE_FRONT_POWER_DIST_PEDAL_BOARD] = FRONT_POWER_DIST_EVENT_STEERING,
+        [EE_FRONT_POWER_DIST_CENTER_CONSOLE] = FRONT_POWER_DIST_EVENT_CENTRE_CONSOLE,
+        [EE_FRONT_POWER_DIST_PEDAL] = FRONT_POWER_DIST_EVENT_PEDAL,
+        [EE_FRONT_POWER_DIST_FRONT_LIGHTS] = FRONT_POWER_DIST_EVENT_FRONT_LIGHTS,
+        [EE_FRONT_POWER_DIST_DASHBOARD_INDICATOR] = FRONT_POWER_DIST_EVENT_DASHBOARD_INDICATOR,
+        [EE_FRONT_POWER_DIST_HORN] = FRONT_POWER_DIST_EVENT_HORN,
+        [FRONT_POWER_DIST_EVENT_DRIVER_FANS] = FRONT_POWER_DIST_EVENT_DRIVER_FANS,
+    },
+};
+
+const FrontPowerDistCanSettings *front_power_dist_can_config_load(void) {
+  return &fpd_settings;
+}
