@@ -20,20 +20,21 @@ typedef enum {
   FRONT_POWER_DIST_EVENT_OFF,
 }FrontPowerDistCanEvent;
 
-// this will likely be replaced by exported enums
+// this will be in exported enums
 typedef enum {
-    // events sent to fpd board, ex: Centre Console sends a message to Front Power Distribution to turn on Driver Display.
     // these are the things that fpd must power
-    FRONT_POWER_DIST_DRIVER_DISPLAY,
-    FRONT_POWER_DIST_PEDAL_BOARD,
-    FRONT_POWER_DIST_CENTER_CONSOLE,
+    EE_FRONT_POWER_DIST_DRIVER_DISPLAY,
+    EE_FRONT_POWER_DIST_PEDAL_BOARD,
+    EE_FRONT_POWER_DIST_CENTER_CONSOLE,
+    EE_FRONT_POWER_DIST_PEDAL,
+    EE_FRONT_POWER_DIST_FRONT_LIGHTS,
+    EE_FRONT_POWER_DIST_DASHBOARD_INDICATOR,
+    EE_FRONT_POWER_DIST_HORN,
+    EE_FRONT_POWER_DIST_DRIVER_FANS,
+    EE_NUM_FRONT_POWER_DIST_EVENTS  
+}FrontPowerDistCanEvent;
 
-    // https://uwmidsun.atlassian.net/wiki/spaces/ELEC/pages/850657322/Front+Power+Distribution
-    NUM_FRONT_POWER_DIST_EVENTS  
-}FrontPowerDistEvent;
 
-// event_type is to determine what type of event it received?
-// event_data_lookup is to?
 typedef struct FrontPowerDistCanSettings {
   FrontPowerDistCanEvent event_type[NUM_FRONT_POWER_DIST_EVENTS];
   uint16_t event_data_lookup[NUM_FRONT_POWER_DIST_EVENTS];

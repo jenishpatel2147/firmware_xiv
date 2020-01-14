@@ -57,11 +57,11 @@ void init_can(void) {
 StatusCode front_power_dist_can_process_event(const Event *e){
     // depending
     if (e->id == some part of fpd) {
-        LOG_DEBUG("Transmitting a _____ message.\n");
+        LOG_DEBUG("Transmitting a message.\n");
         // return CAN_TRANSMIT_...(...);
     }
     if (e->id == some other part of fpd) {
-        LOG_DEBUG("Transmitting a _____ message.\n");
+        LOG_DEBUG("Transmitting a message.\n");
         // return CAN_TRANSMIT_...(...);
     }
     return STATUS_CODE_OK;
