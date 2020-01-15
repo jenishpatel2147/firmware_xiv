@@ -9,4 +9,4 @@ typedef enum{
     FRONT_POWER_DIST_EVENT_HORN,
     FRONT_POWER_DIST_EVENT_DRIVER_FANS,
     NUM_FRONT_POWER_DIST_EVENTS
-}FrontPowerDistEvents;
+}FrontPowerDistEvent;
