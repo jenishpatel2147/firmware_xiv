@@ -11,3 +11,4 @@ static const FrontPowerDistEvent fpd_outputs[] = {
     [FRONT_POWER_DIST_EVENT_PEDAL] = { .port = GPIO_PORT_A, .pin = 15 },
     // etc... for all fpd events
 };
+

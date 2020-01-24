@@ -21,5 +21,3 @@ StatusCode front_power_dist_can_init(FrontPowerDistCanStorage *storage,
 
 // raises a event based on the bitset received
 StatusCode front_power_dist_raise_event(const uint16_t *bitset);
-
-void init_can(void);
