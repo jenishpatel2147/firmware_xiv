@@ -7,7 +7,7 @@
 #define CONFIG_PIN_I2C_SDA \
   { GPIO_PORT_B, 11 }
 
-#define MCP_I2C_ADDR 0x22
+#define MCP_I2C_ADDR 0x20
 
 
 #define IODIR 0x00 // direction, 1 input 0 output
@@ -43,14 +43,27 @@ int main(void) {
     .sda = CONFIG_PIN_I2C_SDA,  //
     .scl = CONFIG_PIN_I2C_SCL,  //
   };
+  const GpioAddress spare_1_en = {.port = GPIO_PORT_A, .pin = 0};
+  const GpioAddress spare_2_en = {.port = GPIO_PORT_A, .pin = 1};
+
+  GpioSettings led_settings = {
+    .direction = GPIO_DIR_OUT,        // The pin needs to output.
+    .state = GPIO_STATE_HIGH,         // Start in the "on" state.
+    .alt_function = GPIO_ALTFN_NONE,  // No connections to peripherals.
+    .resistor = GPIO_RES_NONE,        // No need of a resistor to modify floating logic levels.
+  };
+
+  gpio_init_pin(&spare_1_en, &led_settings);
+  gpio_init_pin(&spare_2_en, &led_settings);
+  gpio_set_state(&spare_1_en, GPIO_STATE_HIGH);
+  gpio_set_state(&spare_2_en, GPIO_STATE_HIGH);
+
   i2c_init(I2C_PORT_2, &settings);
   // try reading form reg 0 and see what we get
   // write 0x4 to IODIR
-  uint8_t data = 0x4;
-  i2c_write_reg(I2C_PORT_2, MCP_I2C_ADDR, IODIR, &data, 1);
-  // read from IODIR to make sure it's 0x4
-  uint8_t read_data = 0;
-  i2c_read_reg(I2C_PORT_2, MCP_I2C_ADDR, IODIR, &read_data, 1);
-  LOG_DEBUG("wrote: %d\nread: %d\n", data, read_data);
+  uint8_t data = 0x0;
+  i2c_write_reg(I2C_PORT_2, MCP_I2C_ADDR, IODIR, &data, 1); 
+  uint8_t output_status = 0xff;
+  i2c_write_reg(I2C_PORT_2, MCP_I2C_ADDR, GPIO, &output_status, 1);
   return 0;
 }
